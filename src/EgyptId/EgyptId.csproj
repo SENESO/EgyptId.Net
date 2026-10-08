@@ -7,13 +7,23 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>EgyptId</AssemblyName>
     <RootNamespace>EgyptId</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageId>EgyptId.Net</PackageId>
     <Authors>Eslam Ashraf</Authors>
     <Description>Egyptian national ID validation &amp; parsing, Egyptian phone number utilities, and Arabic text normalization for .NET.</Description>
     <PackageTags>egypt;national-id;phone;arabic;validation</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/SENESO/EgyptId.Net</RepositoryUrl>
+      <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/SENESO/EgyptId.Net</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>NuGet polish release: branded package icon, embedded README, and full repository metadata.</PackageReleaseNotes>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <None Include="../../docs/icon.png" Pack="true" PackagePath="icon.png" />
+    <None Include="../../README.md" Pack="true" PackagePath="README.md" />
+  </ItemGroup>
 </Project>
