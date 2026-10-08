@@ -124,6 +124,8 @@ namespace EgyptId
         /// </example>
         public static string Normalize(string phone)
         {
+            if (GetPhoneType(phone) == PhoneType.Unknown)
+                return null;
             var national = ToNationalNumber(phone);
             return national == null ? null : "+" + CountryCode + national;
         }

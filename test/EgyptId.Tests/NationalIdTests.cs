@@ -158,7 +158,7 @@ namespace EgyptId.Tests
         public void GetAge_ComputesFullYears()
         {
             var info = NationalId.TryParse(ValidMale); // 1995-08-15
-            Assert.AreEqual(30, info.GetAge(new DateTime(2026, 8, 15)));
+            Assert.AreEqual(31, info.GetAge(new DateTime(2026, 8, 15)));
             Assert.AreEqual(30, info.GetAge(new DateTime(2026, 1, 1)));
             Assert.AreEqual(31, info.GetAge(new DateTime(2026, 8, 16)));
         }
