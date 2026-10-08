@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>EgyptId</AssemblyName>
+    <RootNamespace>EgyptId</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Eslam Ashraf</Authors>
+    <Description>Egyptian national ID validation &amp; parsing, Egyptian phone number utilities, and Arabic text normalization for .NET.</Description>
+    <PackageTags>egypt;national-id;phone;arabic;validation</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/SENESO/EgyptId.Net</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
