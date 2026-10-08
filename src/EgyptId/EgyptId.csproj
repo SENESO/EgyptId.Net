@@ -8,6 +8,7 @@
     <AssemblyName>EgyptId</AssemblyName>
     <RootNamespace>EgyptId</RootNamespace>
     <Version>1.0.0</Version>
+    <PackageId>EgyptId.Net</PackageId>
     <Authors>Eslam Ashraf</Authors>
     <Description>Egyptian national ID validation &amp; parsing, Egyptian phone number utilities, and Arabic text normalization for .NET.</Description>
     <PackageTags>egypt;national-id;phone;arabic;validation</PackageTags>
