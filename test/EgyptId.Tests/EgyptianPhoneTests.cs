@@ -16,6 +16,7 @@ namespace EgyptId.Tests
         [TestCase("0227950000", "+20227950000")]   // Cairo landline
         [TestCase("+20227950000", "+20227950000")]
         [TestCase("034870000", "+2034870000")]     // Alexandria landline
+        [TestCase("0131234567", "+20131234567")]   // Benha landline (area 013)
         public void Normalize_AcceptsAllForms(string input, string expected)
         {
             Assert.AreEqual(expected, EgyptianPhone.Normalize(input));
@@ -85,6 +86,7 @@ namespace EgyptId.Tests
         [TestCase("034870000")]    // Alexandria
         [TestCase("0401234567")]   // Tanta
         [TestCase("+20501234567")] // Mansoura
+        [TestCase("0131234567")]   // Benha (area 013 — starts with '1', still a landline)
         public void IsValidLandline_AcceptsKnownAreas(string input)
         {
             Assert.IsTrue(EgyptianPhone.IsValidLandline(input), input);
@@ -103,6 +105,8 @@ namespace EgyptId.Tests
         [TestCase("0401234567", "Tanta")]
         [TestCase("0881234567", "Asyut")]
         [TestCase("0971234567", "Aswan")]
+        [TestCase("0131234567", "Benha")]
+        [TestCase("+20131234567", "Benha")]
         public void GetAreaName_ReturnsEnglishName(string input, string expected)
         {
             Assert.AreEqual(expected, EgyptianPhone.GetAreaName(input));
@@ -114,6 +118,7 @@ namespace EgyptId.Tests
             Assert.AreEqual("القاهرة / الجيزة", EgyptianPhone.GetAreaName("0227950000", english: false));
             Assert.AreEqual("الإسكندرية", EgyptianPhone.GetAreaName("034870000", english: false));
             Assert.AreEqual("أسيوط", EgyptianPhone.GetAreaName("0881234567", english: false));
+            Assert.AreEqual("بنها", EgyptianPhone.GetAreaName("0131234567", english: false));
         }
 
         [TestCase("01012345678")] // mobile has no area
@@ -130,8 +135,28 @@ namespace EgyptId.Tests
             Assert.AreEqual(PhoneType.Mobile, EgyptianPhone.GetPhoneType("01012345678"));
             Assert.AreEqual(PhoneType.Mobile, EgyptianPhone.GetPhoneType("+201512345678"));
             Assert.AreEqual(PhoneType.Landline, EgyptianPhone.GetPhoneType("0227950000"));
+            Assert.AreEqual(PhoneType.Landline, EgyptianPhone.GetPhoneType("0131234567")); // Benha
             Assert.AreEqual(PhoneType.Unknown, EgyptianPhone.GetPhoneType("0991234567"));
             Assert.AreEqual(PhoneType.Unknown, EgyptianPhone.GetPhoneType("hello"));
+        }
+
+        [TestCase("+201012345678", "01012345678")]
+        [TestCase("201012345678", "01012345678")]
+        [TestCase("0020227950000", "0227950000")]
+        [TestCase("0227950000", "0227950000")]
+        [TestCase("0131234567", "0131234567")] // Benha
+        public void FormatLocal_ReturnsTrunkForm(string input, string expected)
+        {
+            Assert.AreEqual(expected, EgyptianPhone.FormatLocal(input));
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("hello")]
+        [TestCase("0991234567")] // unknown area
+        public void FormatLocal_ReturnsNullWhenUnknown(string input)
+        {
+            Assert.IsNull(EgyptianPhone.FormatLocal(input));
         }
     }
 }

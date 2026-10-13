@@ -7,7 +7,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>EgyptId</AssemblyName>
     <RootNamespace>EgyptId</RootNamespace>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <PackageId>EgyptId.Net</PackageId>
     <Authors>Eslam Ashraf</Authors>
     <Description>Egyptian national ID validation &amp; parsing, Egyptian phone number utilities, and Arabic text normalization for .NET.</Description>
@@ -18,7 +18,7 @@
     <PackageProjectUrl>https://github.com/SENESO/EgyptId.Net</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>NuGet polish release: branded package icon, embedded README, and full repository metadata.</PackageReleaseNotes>
+    <PackageReleaseNotes>1.1.0: new EgyptianPhone.FormatLocal; Benha (013) landlines now recognized by IsValidLandline/GetAreaName/GetPhoneType; wider Arabic diacritic stripping; invariant-culture national-ID date parsing.</PackageReleaseNotes>
   </PropertyGroup>
 
 

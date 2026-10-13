@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace EgyptId
@@ -56,10 +57,11 @@ namespace EgyptId
             else
                 return Fail(info, digits, "First digit must be 2 (1900s) or 3 (2000s).");
 
-            // Date of birth: YY MM DD.
-            var year = centuryBase + int.Parse(digits.Substring(1, 2));
-            var month = int.Parse(digits.Substring(3, 2));
-            var day = int.Parse(digits.Substring(5, 2));
+            // Date of birth: YY MM DD. InvariantCulture so parsing never
+            // depends on the machine's current culture.
+            var year = centuryBase + int.Parse(digits.Substring(1, 2), CultureInfo.InvariantCulture);
+            var month = int.Parse(digits.Substring(3, 2), CultureInfo.InvariantCulture);
+            var day = int.Parse(digits.Substring(5, 2), CultureInfo.InvariantCulture);
 
             DateTime birthDate;
             try

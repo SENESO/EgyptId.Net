@@ -45,8 +45,9 @@ namespace EgyptId
                     case 'ـ': // tatweel U+0640
                         continue;
                     default:
-                        // Diacritics: U+064B..U+0652, superscript alef U+0670.
-                        if ((ch >= 'ً' && ch <= 'ْ') || ch == 'ٰ')
+                        // Diacritics: U+0610..U+061A (small marks), U+064B..U+065F
+                        // (harakat + maddah/hamza marks), superscript alef U+0670.
+                        if ((ch >= 'ؐ' && ch <= 'ؚ') || (ch >= 'ً' && ch <= 'ٟ') || ch == 'ٰ')
                             continue;
                         mapped = ch;
                         break;

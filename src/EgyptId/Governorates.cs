@@ -72,6 +72,7 @@ namespace EgyptId
         /// <summary>Arabic name.</summary>
         public string NameAr { get; }
 
+        /// <summary>Creates a governorate entry.</summary>
         public Governorate(string code, string nameEn, string nameAr)
         {
             Code = code;

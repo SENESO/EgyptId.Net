@@ -13,6 +13,7 @@ namespace EgyptId.Tests
         [TestCase("مؤمن", "مومن")]
         [TestCase("شائعة", "شايعه")]
         [TestCase("مُحَمَّد", "محمد")]       // diacritics stripped
+        [TestCase("آمٓين", "امين")]          // maddah above (U+0653) stripped
         [TestCase("عـربـي", "عربي")]          // tatweel stripped
         [TestCase("  أحمد   علي  ", "احمد علي")] // whitespace collapsed
         [TestCase("", "")]

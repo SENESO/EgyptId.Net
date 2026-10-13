@@ -131,6 +131,23 @@ namespace EgyptId
         }
 
         /// <summary>
+        /// Local (trunk) display form of an Egyptian number: "01012345678"
+        /// for mobiles, "0227950000" for landlines.
+        /// Returns null when the input is not a recognizable Egyptian number.
+        /// </summary>
+        /// <example>
+        /// FormatLocal("+201012345678") // "01012345678"
+        /// FormatLocal("0020222795000") // "0227950000"
+        /// </example>
+        public static string FormatLocal(string phone)
+        {
+            var national = ToNationalNumber(phone);
+            if (national == null || GetPhoneType(phone) == PhoneType.Unknown)
+                return null;
+            return "0" + national;
+        }
+
+        /// <summary>
         /// True for an 11-digit Egyptian mobile number (010/011/012/015),
         /// in any accepted input form.
         /// </summary>
@@ -176,15 +193,27 @@ namespace EgyptId
         /// True for an Egyptian landline (known area code, 8-10 national digits),
         /// in any accepted input form.
         /// </summary>
+        /// <remarks>
+        /// Numbers are classified by area code first; only a number that is
+        /// genuinely a valid mobile is excluded. This matters for Benha (013):
+        /// its national form ("13xxxxxxx") starts with '1' but is a landline,
+        /// not a mobile.
+        /// </remarks>
         public static bool IsValidLandline(string phone)
         {
             var national = ToNationalNumber(phone);
-            if (national == null || national[0] == '1')
+            if (national == null)
                 return false;
 
-            return GetAreaCode(national) != null
-                && national.Length >= 8
-                && national.Length <= 10;
+            if (GetAreaCode(national) == null)
+                return false;
+
+            // A real mobile (010/011/012/015, 10 national digits) is never a
+            // landline, even if it superficially resembles an area prefix.
+            if (IsValidMobile(phone))
+                return false;
+
+            return national.Length >= 8 && national.Length <= 10;
         }
 
         /// <summary>
@@ -203,12 +232,15 @@ namespace EgyptId
         public static string GetAreaName(string phone, bool english)
         {
             var national = ToNationalNumber(phone);
-            if (national == null || national[0] == '1')
+            if (national == null)
+                return null;
+
+            // Same rule as IsValidLandline: area code first, and a real mobile
+            // (e.g. 010...) is never an area name — but a Benha 013 landline is.
+            if (GetAreaCode(national) == null || IsValidMobile(phone))
                 return null;
 
             var areaCode = GetAreaCode(national);
-            if (areaCode == null)
-                return null;
 
             var map = english ? _areaNamesEn : _areaNamesAr;
             string name;

@@ -43,6 +43,8 @@ EgyptianPhone.Normalize("٠١٠١٢٣٤٥٦٧٨");     // "+201012345678" (Arabi
 
 EgyptianPhone.GetCarrier("01112345678");    // PhoneCarrier.Etisalat
 EgyptianPhone.GetAreaName("0227950000");    // "Cairo / Giza"
+EgyptianPhone.GetAreaName("0131234567");    // "Benha" (area 013 — a landline, not a mobile)
+EgyptianPhone.FormatLocal("+201012345678"); // "01012345678" (trunk form, handy for display/dialing)
 
 // --- Arabic search normalization ---
 ArabicText.EqualsNormalized("أحمد", "احمد");              // true
@@ -82,11 +84,12 @@ confident-looking wrong one.
 | Member | Description |
 |---|---|
 | `Normalize(string) → string?` | Any form → `+20...`. Accepts local (`010...`), trunk (`0020...`), national (`2010...`), international (`+2010...`), spaces/dashes, Arabic-Indic digits. Null when unrecognizable. |
+| `FormatLocal(string) → string?` | Local trunk form: `"01012345678"` for mobiles, `"0227950000"` for landlines. Null when unrecognizable. |
 | `IsValidMobile(string) → bool` | 11-digit mobile on a known prefix. |
 | `GetCarrier(string) → PhoneCarrier?` | `Vodafone` (010), `Etisalat` (011), `Orange` (012), `WE` (015). |
 | `GetCarrierName(PhoneCarrier) → string` | Display name (`"Etisalat e&"`, …). |
-| `IsValidLandline(string) → bool` | Known area code, sane length. |
-| `GetAreaName(string, bool english = true) → string?` | e.g. `"Cairo / Giza"` / `"القاهرة / الجيزة"`. |
+| `IsValidLandline(string) → bool` | Known area code, sane length — including Benha (013), whose numbers start with `1` but are landlines. |
+| `GetAreaName(string, bool english = true) → string?` | e.g. `"Cairo / Giza"` / `"القاهرة / الجيزة"`, `"Benha"` / `"بنها"`. |
 | `GetPhoneType(string) → PhoneType` | `Mobile`, `Landline`, or `Unknown`. |
 
 ### `ArabicText`
